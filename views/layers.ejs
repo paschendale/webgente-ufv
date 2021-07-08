@@ -1,0 +1,135 @@
+<%- include('partials/admin/header.ejs') %> 
+
+<div id="camadas">
+
+  <div id="modalHere"></div>
+
+  <div class="row">
+
+    <div class="col-12">
+
+       <table 
+          class="table table-striped" 
+          id="tableLayers"
+          data-toggle="table" 
+          data-url="/listlayers" 
+          data-search="true"
+          data-pagination="true">
+           
+
+          <thead class="thead-dark">
+            <tr>
+              <th data-checkbox="true"></th>
+              <th data-field="id">ID</th>
+              <th data-field="layerName">Nome da camada</th>
+              <th data-field="layer">Nome da chamada</th>
+              <th data-field="type">Tipo</th>
+              <th data-field="group">Grupo</th>
+              <th data-formatter='TableActions'>Opções</th>
+          </thead>
+
+        </table>
+
+    </div>
+
+  </div>
+
+</div>
+  
+<!--Icones-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+<!--Bootstrap-table-->
+<script src="/js/bootstrap-table/bootstrap-table.js" ></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap-table/bootstrap-table.css">
+
+<script>
+
+  var layerId = []
+
+  /* Adição dos botões de remover e adicionar camadas */
+  $( document ).ready(function() {
+    $('.fixed-table-toolbar').prepend('<button class="btn btn-dark layer-toolbar" id="remove-layers"  style="margin-right:5px;" data-toggle="modal" data-target="#modalAllLayers"onClick="ModalAllLayers(null, null)">Remover Camadas</button> <a class="btn btn-dark layer-toolbar" id="addNewLayer"  style="margin-left:5px;" href="/layers/add"">Nova Camada</a>')
+  });
+
+  /* Adição do botão de reordenar camadas */
+  $( document ).ready(function() {
+    $('.fixed-table-toolbar').append('<a class="btn btn-dark layer-toolbar" id="reorderLayers"  style="margin-left:5px;" href="/layers/reorder"">Reordernar camadas</a>')
+  });
+
+  /* Aplicação de raio e margem nos botões de ação*/
+   function TableActions(value, row, index, field) {
+    return [`<button class="btn btn-dark btn-custom" id="removeLayer" data-toggle="modal" data-target="#modalLayer" onclick='ModalAllLayers("`+row.layerName+`",`+row.id+`)'> <i class="fas fa-trash"></i></button>`, ' ', '<button class="btn btn-dark btn-custom2" id="editLayer" onclick="editLayer('+row.id+')"> <i class="fas fa-edit"></i></button>'].join('');
+  }
+
+  function ModalAllLayers(layerName, id){
+  	if(layerName == null && id == null){
+   		var layerName = [];
+   		layerId = [];
+   		var $table = $('#tableLayers');
+
+   		$.map($table.bootstrapTable('getSelections'), (row) => {
+        	layerName.push(row.layerName);
+        	layerId.push(row.id);
+        	console.log(layerName);
+
+        	$('#modalHere').html(`
+	        	<div class="modal fade" id="modalAllLayers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	          		<div class="modal-dialog" role="document">
+	            		<div class="modal-content">
+	              			<div class="modal-body">
+	                			<p>Você está excluindo as camadas: `+ layerName.join(', ') +`</p>
+	                			<p>Confirmar ação ?</p>
+	              			</div>
+	              			<div class="modal-footer">
+	                			<button type="button" class="btn btn-primary" onclick="removeLayer(null)">Sim</button>
+	                			<button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+	              			</div>
+	            		</div>
+	          		</div>
+	        	</div>
+      		`);
+        })
+    }
+    else if(layerName != null && id != null){
+    	console.log(id);
+
+    	$('#modalHere').html(`
+      		<div class="modal fade" id="modalLayer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        		<div class="modal-dialog" role="document">
+          			<div class="modal-content">
+            			<div class="modal-body">
+              				<p>Você está excluindo a camada: `+layerName+`</p>
+              				<p>Confirmar ação ?</p>
+            			</div>
+	            		<div class="modal-footer">
+	              			<button type="button" class="btn btn-primary" onclick="removeLayer(`+id+`)">Sim</button>
+	              			<button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+	            		</div>
+          			</div>
+        		</div>
+      		</div>
+    	`);
+    }
+  }
+
+  function editLayer(index) {
+    window.location.href = '/layers/edit/'+index
+  }
+
+  function removeLayer(id){
+  	if(id == null){
+	    let index = JSON.stringify(layerId);
+	    window.location.href = '/layers/delete/'+index
+	}
+	else{
+		layerId = [];
+	    layerId.push(id);
+		let index = JSON.stringify(layerId);
+      	window.location.href = '/layers/delete/'+index
+	}
+  }
+</script>
+</div>
+  
+  <%- include('partials/admin/footer.ejs') %> 

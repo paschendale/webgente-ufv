@@ -1,0 +1,61 @@
+<!-- Leaflet -->
+<script src="/js/leaflet/leaflet.js"></script>
+
+<!-- Plugins do Leaflet -->
+<script src="/js/leaflet/plugins/Leaflet.GroupedLayerControl/leaflet.groupedlayercontrol.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+<script src="/js/leaflet/plugins/Leaflet.Draw/Leaflet.draw.js"></script>
+<!--<script src="https://unpkg.com/shp-write@latest/shpwrite.js"></script> Implementação de download de feições desenhadas pela ferramenta de medição em shapefile, a biblioteca tem alguns bugs que menciono em draw.js, então deixo aqui comentado para desenvolvimento posterior -->
+
+<!-- Bootstrap e dependências -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="/js/bootstrap/bootstrap.js"></script>
+
+<!-- Código fonte do WebGENTE -->
+<script src="/js/webgente.js"></script>
+<script src="/js/wms.js"></script>
+<script src="/js/wfs.js"></script>
+<script src="/js/draw.js"></script>
+
+<!-- Código fonte de PhotoSphereViewer-->
+<script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uevent@2/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/photo-sphere-viewer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/plugins/settings.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photo-sphere-viewer@4/dist/plugins/resolution.min.js"></script>
+
+<!-- Código fonte do proj4 -->
+<script src="/js/proj4.js"></script>
+
+<!--Icones-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+<!--Bootstrap-table-->
+<script src="/js/bootstrap-table/bootstrap-table.js" ></script>
+<script src="/js/bootstrap-table/bootstrap-table.js" ></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap-table/bootstrap-table.css">
+
+<!-- Redimensiona a div do mapa para o espaço vertical disponivel em tela e habilita/desabilita botão da legenda com base no tamanho da tela-->
+<script type="application/javascript">
+    function resizeMap () {
+        $("#map").height(window.innerHeight)
+        // var map = document.getElementById('map');
+        // var newHeight = window.innerHeight - document.getElementById('navbar').clientHeight;
+        // map.style.height = newHeight + "px";
+    }
+
+    function disableLegendContainer () {
+        if ($(window).width() < 1000 && legend_enabled == 1) {
+            document.getElementById('legend-button').click();
+        } 
+    }
+
+    $(document).ready(disableLegendContainer);
+    $(window).resize(disableLegendContainer);
+    
+     $(document).ready(resizeMap);
+     $(window).resize(resizeMap);    
+    </script>
+
+</html>
