@@ -176,7 +176,7 @@ function open360ViewerMin() {
     var div = document.getElementById('container-psv');
     var PSV = new PhotoSphereViewer.Viewer({
         panorama: window.location.origin + element,
-        useXmpData: true,
+        useXmpData: false,
         container: div,
         minFov: 5,
         plugins: [

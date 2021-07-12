@@ -3,9 +3,9 @@
 <body>
     <!-- <%- include('partials/navbar.ejs') %>  -->    
     <div id='campus-buttons' class='leaflet-top leaflet-left campus-buttons-container d-flex justify-content-center'>
-        <button type="button" class="btn btn-outline-dark campus-buttons" onClick="setViewVicosa()">Viçosa</button> &nbsp;
-        <button type="button" class="btn btn-outline-dark campus-buttons" onClick="setViewCRP()">Florestal</button>&nbsp;
-        <button type="button" class="btn btn-outline-dark campus-buttons" onClick="setViewFlorestal()">Rio Paranaíba</button>
+        <button type="button" class="btn btn-outline-dark campus-buttons" data-toggle="tooltip" data-placement="bottom" title="Navegue até o Campus Viçosa" onClick="setViewVicosa()">Viçosa</button> &nbsp;
+        <button type="button" class="btn btn-outline-dark campus-buttons" data-toggle="tooltip" data-placement="bottom" title="Navegue até o Campus Florestal" onClick="setViewCRP()">Florestal</button>&nbsp;
+        <button type="button" class="btn btn-outline-dark campus-buttons" data-toggle="tooltip" data-placement="bottom" title="Navegue até o Campus Rio Paranaíba" onClick="setViewFlorestal()">Rio Paranaíba</button>
     </div>
     <div class='leaflet-top leaflet-left campus-buttons-toggler'>
         <button id='campus-buttons-toggler' class="btn btn-outline-dark" onClick="showCampusSwitcher()">
@@ -60,7 +60,8 @@
     }
 
     function setViewCRP() {
-        map.setView([-19.219094652302676, -46.22432112693787], 17, 
+        map.setView(
+            [-19.883105805644448, -44.41607236862183], 16, 
         {
             "animate": true,
             "pan": {
@@ -70,7 +71,7 @@
     }
 
     function setViewFlorestal() {
-        map.setView([-19.883105805644448, -44.41607236862183], 16, 
+        map.setView([-19.219094652302676, -46.22432112693787], 17, 
         {
             "animate": true,
             "pan": {
