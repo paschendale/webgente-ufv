@@ -174,29 +174,43 @@ function open360ViewerMin() {
     $('.leaflet-popup-content').html(html) // Inserir aqui o HTML do Visualizador
 
     var div = document.getElementById('container-psv');
-    var PSV = new PhotoSphereViewer.Viewer({
+
+    var PSV = new PhotoSphereViewer({
         panorama: window.location.origin + element,
-        useXmpData: false,
         container: div,
+        usexmpdata: false,
+        time_anim: 3000,
         minFov: 5,
-        plugins: [
-            PhotoSphereViewer.SettingsPlugin,
-            [PhotoSphereViewer.ResolutionPlugin, {
-              resolutions: [
-                {
-                  id      : 'normal',
-                  label   : 'Baixa Resolução',
-                  panorama: window.location.origin + element,
-                },
-                {
-                  id      : 'hd',
-                  label   : 'Alta Resolução',
-                  panorama: window.location.origin + element.split('.')[0]+'_hd.'+element.split('.')[1],
-                },
-              ],
-            }],
-        ]
+        loading_img: 'img/loading.gif',
+        navbar: ['autorotate', 'zoom'],
+        navbar_style: {
+            backgroundColor: 'rgba(58, 67, 77, 0.7)'
+        },
     });
+
+    // var PSV = new PhotoSphereViewer.Viewer({
+    //     panorama: window.location.origin + element,
+    //     useXmpData: false,
+    //     container: div,
+    //     minFov: 5,
+    //     plugins: [
+    //         PhotoSphereViewer.SettingsPlugin,
+    //         [PhotoSphereViewer.ResolutionPlugin, {
+    //           resolutions: [
+    //             {
+    //               id      : 'normal',
+    //               label   : 'Baixa Resolução',
+    //               panorama: window.location.origin + element,
+    //             },
+    //             {
+    //               id      : 'hd',
+    //               label   : 'Alta Resolução',
+    //               panorama: window.location.origin + element.split('.')[0]+'_hd.'+element.split('.')[1],
+    //             },
+    //           ],
+    //         }],
+    //     ]
+    // });
 }
 
 /* Função para abertura automatica do 360 */
