@@ -120,10 +120,12 @@ function addLayer (layer){
         if (layer.defaultBaseLayer == 1) {
             Lc.addOverlay(l, layer.layerName + addMetadata(layer.metadata), layer.group);
             
-            // O comportamento de defaultBaseLayer = true só é ativado se não houver indicação de camadas no hash
-            if(window.location.hash == '') {
-                l.addTo(map);
-            }
+            // // O comportamento de defaultBaseLayer = true só é ativado se não houver indicação de camadas no hash
+            // if(window.location.hash == '') {
+            //     l.addTo(map);
+            // }
+
+            l.addTo(map)
 
         } else {
             Lc.addOverlay(l, layer.layerName + addMetadata(layer.metadata), layer.group);

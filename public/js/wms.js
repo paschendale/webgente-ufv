@@ -130,6 +130,9 @@ function attributeFormatter(element,keys) {
             return '<a href =#  dir="'+element+'"  id = "path_360_min" onClick = "open360ViewerMin()">Visualizar panorama 360°</a>'
         } else if (keys.indexOf('path_360') != -1) {
             return '<a href =#  dir="'+element+'"  id = "path_360" onClick = "open360Viewer()">Visualizar panorama 360°</a>'
+        } else if (keys.indexOf('caminho') != -1){ 
+            // Se um dos valores contiver a substring 'caminho' formatar como link
+            return '<a target="_blank" id="caminho-video" href="'+element+'">Link</a>'
         } else if (element.includes('http')){ 
             // Se um dos valores contiver a substring 'http' formatar como link
             return '<a target="_blank" href="'+element+'">Link</a>'
@@ -213,12 +216,26 @@ function open360ViewerMin() {
     // });
 }
 
+/* Criador do modal com os links do Youtube */
+function createVideoModal (e,link) {
+
+    map.popup(e.latlng).setContent('<iframe width="100%" height="350" src="'+link+'" allowfullscreen></iframe>')
+
+}
+
 /* Função para abertura automatica do 360 */
 
 map.on('popupopen', function(e) {
-    if ($('#path_360_min') !== undefined) {
+    if ($('#path_360_min').length !== 0) {
        $('#path_360_min').click()
-    }
+    } 
+});
+
+map.on('popupopen', function(e) {
+    if ($('#caminho-video').length !== 0 && $('#path_360_min').length == 0) {
+        window.open($('#caminho-video').attr('href'))
+        setTimeout(map.closePopup(),500);
+    } 
 });
 
 /* Função para obter a legenda do Geoserver */
